@@ -1,0 +1,40 @@
+{
+  "name": "pukiwiki-syntax",
+  "displayName": "PukiWiki Syntax Highlighter",
+  "description": "Syntax Highlighter for PukiWiki documents",
+  "version": "0.1.0",
+  "publisher": "inucat",
+  "icon": "icon.png",
+  "repository": {
+    "url": "https://github.com/inucat/pukiwiki-vscode"
+  },
+  "engines": {
+    "vscode": "^1.76.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "pukiwiki",
+        "aliases": [
+          "PukiWiki",
+          "pukiwiki"
+        ],
+        "extensions": [
+          ".pkwk",
+          ".puki"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "pukiwiki",
+        "scopeName": "text.pukiwiki",
+        "path": "./syntaxes/pukiwiki.tmLanguage.json"
+      }
+    ]
+  }
+}

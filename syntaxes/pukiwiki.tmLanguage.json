@@ -1,0 +1,201 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "PukiWiki",
+  "patterns": [
+    { "include": "#comment" },
+    { "include": "#pre" },
+    { "include": "#link" },
+    { "include": "#bold" },
+    { "include": "#italic" },
+    { "include": "#strike_out" },
+    { "include": "#footnote" },
+    { "include": "#inline_plugins" },
+    { "include": "#ncr" },
+    { "include": "#head" },
+    { "include": "#keywords" },
+    { "include": "#quote" },
+    { "include": "#listing" },
+    { "include": "#wikiname" },
+    { "include": "#block_plugin" },
+    { "include": "csv_table" },
+    { "include": "table" }
+  ],
+  "repository": {
+    "comment": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash",
+          "match": "^//.*$"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.pukiwiki",
+          "match": "^(LEFT|CENTER|RIGHT):"
+        },
+        {
+          "name": "keyword.other",
+          "match": "^-{4,}"
+        },
+        {
+          "name": "keyword.other",
+          "match": "^~"
+        },
+        {
+          "name": "keyword.other",
+          "match": "~$"
+        }
+      ]
+    },
+    "wikiname": {
+      "patterns": [
+        {
+          "name": "markup.underline.link",
+          "match": "([A-Z][a-z]+){2,}"
+        }
+      ]
+    },
+    "bold": {
+      "patterns": [
+        {
+          "name": "markup.bold",
+          "begin": "''(?!')",
+          "end": "''",
+          "patterns": [{ "include": "#italic" }]
+        }
+      ]
+    },
+    "italic": {
+      "patterns": [
+        {
+          "name": "markup.italic",
+          "begin": "'''",
+          "end": "'''",
+          "patterns": [{ "include": "#bold" }]
+        }
+      ]
+    },
+    "strike_out": {
+      "patterns": [
+        {
+          "name": "markup.deleted",
+          "match": "%%.*%%"
+        }
+      ]
+    },
+    "footnote": {
+      "patterns": [
+        {
+          "name": "string",
+          "match": "\\(\\(.*\\)\\)",
+          "patterns": [{ "include": "$self" }]
+        }
+      ]
+    },
+    "inline_plugins": {
+      "patterns": [
+        {
+          "name": "keyword.other",
+          "begin": "&\\w+",
+          "end": ";"
+        }
+      ]
+    },
+    "link": {
+      "patterns": [
+        {
+          "match": "\\[\\[.*\\]\\]",
+          "name": "markup.underline.link"
+        }
+      ]
+    },
+    "ncr": {
+      "patterns": [
+        {
+          "name": "keyword.other",
+          "match": "&#(\\d+|x[\\da-f]+);"
+        }
+      ]
+    },
+    "pre": {
+      "patterns": [
+        {
+          "name": "string",
+          "match": "^ +.*$"
+        }
+      ]
+    },
+    "head": {
+      "patterns": [
+        {
+          "name": "markup.heading",
+          "match": "^\\*{1,3}.*$",
+          "patterns": [{ "include": "#link" }]
+        }
+      ]
+    },
+    "quote": {
+      "patterns": [
+        {
+          "name": "markup.quote",
+          "begin": "^>{1,3}|^<{1,3}",
+          "end": "^(?<[-+#*~|,]|$)"
+        }
+      ]
+    },
+    "listing": {
+      "patterns": [
+        {
+          "name": "keyword.other",
+          "match": "^\\+{1,3}"
+        },
+        {
+          "name": "keyword.other",
+          "match": "^-{1,3}"
+        },
+        {
+          "name": "keyword.other",
+          "match": "^:{1,3}.*\\|"
+        }
+      ]
+    },
+    "table": {
+      "patterns": [
+        {
+          "name": "constant.character",
+          "match": "^(\\|)((.*|([~>]))(\\|))+[hfc]?",
+          "captures": {
+            "1": { "name": "keyword.operator" }
+          }
+        }
+      ]
+    },
+    "csv_table": {
+      "patterns": [
+        {
+          "name": "string",
+          "match": "^(,.*)+"
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.double.pukiwiki",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.pukiwiki",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "block_plugin": {
+      "patterns": [
+        { "name": "keyword.control", "match": "^#\\w+(\\(.*\\))?\\s*" }
+      ]
+    }
+  },
+  "scopeName": "text.pukiwiki"
+}
