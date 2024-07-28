@@ -4,6 +4,7 @@
   "description": "Syntax Highlighter for PukiWiki documents",
   "version": "0.1.0",
   "publisher": "inucat",
+  "icon": "icon.png",
   "repository": {
     "url": "https://github.com/inucat/pukiwiki-vscode"
   },
